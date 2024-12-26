@@ -5,10 +5,6 @@ from pytimeparse import parse
 from dotenv import load_dotenv
 
 
-TG_TOKEN = os.getenv('TOKEN_TELEGA')
-BOT = ptbot.Bot(TG_TOKEN)
-
-
 def render_progressbar(total, iteration, prefix='', suffix='', length=30, fill='█', zfill='░'):
     iteration = min(total, iteration)
     percent = "{0:.1f}"
@@ -42,4 +38,6 @@ def main():
 
 if __name__ == '__main__':
     load_dotenv()
+    TG_TOKEN = os.getenv('TOKEN_TELEGA')
+    BOT = ptbot.Bot(TG_TOKEN)
     main()
