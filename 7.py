@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 
 def main():
     load_dotenv()
-    TG_TOKEN = os.getenv('TOKEN_TELEGA')
-    BOT = ptbot.Bot(TG_TOKEN)
+    tg_token = os.getenv('TOKEN_TELEGA')
+    bot = ptbot.Bot(tg_token)
 
     def render_progressbar(total, iteration, prefix='', suffix='', length=30, fill='█', zfill='░'):
         iteration = min(total, iteration)
@@ -19,21 +19,21 @@ def main():
         return '{0} |{1}| {2}% {3}'.format(prefix, pbar, percent, suffix)
 
     def answer(chat_id):
-        BOT.send_message(chat_id, 'Время вышло')
+        bot.send_message(chat_id, 'Время вышло')
 
     def notify_progress(secs_left, chat_id, message_id, time):
         text = ('Осталось {} секунд\n{}').format(secs_left, render_progressbar(time, time-secs_left))
-        BOT.update_message(chat_id, message_id, text)
+        bot.update_message(chat_id, message_id, text)
 
     def reply(chat_id, message):
         time = parse(message)
         text = ('Осталось {} секунд\n{}').format(time, render_progressbar(time, 0))
-        message_id = BOT.send_message(chat_id, text)
-        BOT.create_countdown(time, notify_progress, message_id=message_id, chat_id=chat_id, time=time)
-        BOT.create_timer(time, answer, chat_id=chat_id)
+        message_id = bot.send_message(chat_id, text)
+        bot.create_countdown(time, notify_progress, message_id=message_id, chat_id=chat_id, time=time)
+        bot.create_timer(time, answer, chat_id=chat_id)
 
-        BOT.reply_on_message(reply)
-        BOT.run_bot()
+        bot.reply_on_message(reply)
+        bot.run_bot()
 
 
 if __name__ == '__main__':
