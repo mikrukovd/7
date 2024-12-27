@@ -32,8 +32,8 @@ def main():
         bot.create_countdown(time, notify_progress, message_id=message_id, chat_id=chat_id, time=time)
         bot.create_timer(time, answer, chat_id=chat_id)
 
-        bot.reply_on_message(reply)
-        bot.run_bot()
+    bot.reply_on_message(reply)
+    bot.run_bot()
 
 
 if __name__ == '__main__':
