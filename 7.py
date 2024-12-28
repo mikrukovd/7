@@ -34,8 +34,8 @@ def reply(author_id, author_message, bot):
 
 def main():
     load_dotenv()
-    TG_TOKEN = os.getenv('TOKEN_TELEGA')
-    bot = ptbot.Bot(TG_TOKEN)
+    tg_token = os.getenv('TOKEN_TELEGA')
+    bot = ptbot.Bot(tg_token)
     bot.reply_on_message(reply, bot=bot)
     bot.run_bot()
 
